@@ -1,0 +1,65 @@
+{
+	"model":{
+		"info":             "
+								`load_method`:   control the data load in method, choose either (txt or voc), 
+		                		`dictionary`:    classes, 
+		                		`backbones`:     for different model selection, such as SEnet, ResNet, DenseNet and so on
+								`learning_rate`: train model lr,
+								`lr_schedule`:   '#epoch1, ratio1, #epoch2, ratio2'
+								`weight_decay`:  weight_decay for L2 Loss
+								`momentum`:      adam momentum, default optimizer = ADAM
+								`max_epoch`:     maximum number of epoch to train,
+								`gpus`:          gpuID, support multi-gpu
+						    ",
+
+		"load_method":      "txt",
+		"dictionary":       "/code/dict/Psign24-small.dict",
+		"backbones":        "SE_Inception_resnet_v2",
+		"learning_rate":    0.01,
+		"lr_schedule":      "",
+		"weight_decay":     0.0005,
+		"momentum":         0.9,
+		"max_epoch":        100,
+		"gpus":             "0"  
+	},
+
+	"train":{
+		"info":             "
+								`name`:          project name, for model restore
+								`labelfile`:     a txtfile of trainset with format `imagepath"\t"label`,
+								`imgdir`:        imgdir/imagepath is the absolute path for image load in,
+								`batch`:         #batch images per step,
+								`size`:          model input [batch, size, size, channel], default image shape is square,
+								`augment_warmup` data which "epoch < augment_warmup" will not be augmented
+								`augment`:       augment method, support "jitter, intensity, flip, blur, rotate, noise",
+													`jitter`:   jitter-ratio,    default ratio    = 0.2
+													`blur`:     blur-maxlevel,   default maxlevel = 3
+													`rotate`:   rotate-angle,    default angle.   = 5
+													other methods have no parameters
+								`pretrained`:    pretrained model path, "" means using ckpt or auto initialization
+		                    ",
+
+        "name":             "SEIR2-PSign24-small",
+		"labelfile":        "/data/txts/train.txt",
+		"imgdir":           "/data",
+		"batch":            10,
+		"size":             48,
+		"augment_warmup":   0,
+		"augment":          "jitter-0.2, blur-3, rotate-5, intensity",
+		"pretrained":       "",
+	},
+
+	"test":{
+		"info":             "
+								`labelfile`:     a txtfile of testset with format `imagepath"\t"label`, 
+								`imgdir`:        imgdir/imagepath is the absolute path for image load in,
+								`batch`:         #batch images per step,
+								`size`:          model input [batch, size, size, channel], default image shape is square,
+		                    ",
+
+		"labelfile":        "/data/txts/train.txt",
+		"imgdir":           "/data",
+		"batch":            1,
+		"size":             48,
+	}
+}

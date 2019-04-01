@@ -1,0 +1,4 @@
+/.remove
+dict/*.dict
+model/
+logs/

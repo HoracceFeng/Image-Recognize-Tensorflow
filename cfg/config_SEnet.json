@@ -1,0 +1,35 @@
+{
+	"model":{
+		
+		"load_method":      "txt",
+		"dictionary":       "/code/dict/Psign24-small.dict",
+		"backbones":        "SE_Inception_resnet_v2",
+		"learning_rate":    0.01,
+		"lr_schedule":      "",
+		"weight_decay":     0.0005,
+		"momentum":         0.9,
+		"max_epoch":        100,
+		"gpus":             ""  
+	},
+
+	"train":{
+
+		"name":             "SEIR2-PSign24-small",
+		"labelfile":        "/data/txts/train.txt",
+		"imgdir":           "/data",
+		"batch":            10,
+		"size":             48,
+		"augment_warmup":   0,
+		"augment":          "jitter-0.2, blur-3, rotate-5, intensity",
+		"pretrained":       ""
+	},
+
+	"test":{
+
+		"labelfile":        "/data/txts/train.txt",
+		"imgdir":           "/data",
+		"batch":            1,
+		"size":             48
+	}
+}
+
